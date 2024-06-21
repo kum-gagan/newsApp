@@ -1,0 +1,29 @@
+body {
+    margin: 0;
+    font-family: 'Josefin Sans', sans-serif;
+    background-color: rgb(177, 179, 182);
+}
+.pointer{
+  cursor: pointer;
+}
+.pointer:hover{
+  background-color: aliceblue;
+  color: black;
+  border-radius: 5px;
+}
+ .btn{
+  transition: all 0.2s ease-out;
+}
+ .btn:hover{
+  background-color: #0d6efd;
+  border: none;
+  transform: scale(1.2);
+  transition: all 0.2s ease-out;
+}
+.card{
+  transition: all 0.5s ease-out;
+}
+ .card:hover{
+  transform: scale(1.1);
+  transition: all 0.5s ease-out;
+}
