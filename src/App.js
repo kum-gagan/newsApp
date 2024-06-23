@@ -9,6 +9,7 @@ function App() {
   const [category, setCategory] = useState('general');
   const [loading, setLoading] = useState('Loading...');
   const [search, setSearch] = useState('');
+  const [country, setCountry] = useState('in');
   //pagination
   const [currentPage, setCurrentPage] = useState(1);
   const [totalResults, setTotalResults] = useState(0);
@@ -21,18 +22,18 @@ function App() {
   useEffect(() => {
     async function fetchData() {
       try {
-        const res = await fetch(`https://newsapi.org/v2/top-headlines?country=in&category=${category}&pageSize=${pageSize}&page=${currentPage}&apiKey=${Api_Key}`);
+        const res = await fetch(`https://newsapi.org/v2/top-headlines?country=${country}&category=${category}&pageSize=${pageSize}&page=${currentPage}&apiKey=${Api_Key}`);
         const data = await res.json();
         setArticles(data.articles);
         setTotalResults(data.totalResults);
-        console.log(data.totalResults)
+        console.log(data)
         setLoading('');
       } catch (error) {
         console.log('Error fetching data:', error);
       }
     }
     fetchData();
-  }, [currentPage, category]);
+  }, [currentPage, category, country]);
 
   
   const handlePreviousPage = () => {
@@ -55,6 +56,7 @@ function App() {
   return (
     <div>
       <Navbar 
+      setCountry={setCountry}
       setLoading={setLoading}
       setSearch={setSearch} 
       setCategory={setCategory}/>
@@ -71,6 +73,7 @@ function App() {
             key={index}
             title={items.title}
             description={items.description}
+            publishedAt={items.publishedAt}
             img={items.urlToImage}
             url={items.url}
           />
