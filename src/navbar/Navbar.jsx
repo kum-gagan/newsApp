@@ -1,19 +1,17 @@
-import React from 'react'
+import React, { useState } from 'react'
 
-const Navbar = ({ setCountry, setSearch, setLoading, setCategory }) => {
-
+const Navbar = ({ setCountry, setSearch, setLoading,category, setCategory }) => {
     const newCategory = ['business', 'entertainment', 'health', 'science', 'sport', 'technology'];
 
     const countryData = ['in','ae', 'ar', 'at', 'au', 'be', 'bg', 'br', 'ca', 'ch', 'cn', 'co', 'cu', 'cz', 'de', 'eg', 'fr', 'gb', 'gr', 'hk', 'hu', 'id', 'ie', 'il', 'it', 'jp', 'kr', 'lt', 'lv', 'ma', 'mx', 'my', 'ng', 'nl', 'no', 'nz', 'ph', 'pl', 'pt', 'ro', 'rs', 'ru', 'sa', 'se', 'sg', 'si', 'sk', 'th', 'tr', 'tw', 'ua', 'us', 've', 'za'];
+    
 
     const handleClick = (id) => {
         newCategory.map((elem, index) => {
-            return (id === index) ? setCategory(elem) : null;
+            return (id === index) ? `${setCategory(elem)}` : null;
         })
     }
-    const handleChange = (con) => {
-        setCountry(con);
-    }
+   
     return (
         <>
             <nav className="navbar navbar-expand-lg bg-body-tertiary bg-opacity-50" data-bs-theme="dark">
@@ -25,14 +23,14 @@ const Navbar = ({ setCountry, setSearch, setLoading, setCategory }) => {
                     <div className="collapse navbar-collapse" id="navbarSupportedContent">
                         <ul className="navbar-nav me-auto mb-2 mb-lg-0">
                             <li className="nav-item">
-                                <a className="nav-link pointer" aria-current="page" onClick={() => { setLoading('Loading...'); setCategory('general') }} href="/">All News</a>
+                                <a className={`nav-link pointer"   ${category === 'general' ? 'text-white' : ''}`} onClick={() => { setLoading('Loading...'); setCategory('general') }} href="/">All News</a>
                             </li>
                             {
                                 newCategory.map((items, id) => {
-                                    return <li className="nav-item" key={id}>
-                                        <a className="nav-link pointer text-capitalize" onClick={() => {
+                                    return <li className="nav-item" key={items}>
+                                        <a className={`nav-link pointer text-capitalize ${items === category ? 'text-white' : ''}`} onClick={() => {
                                             setLoading('Loading...');
-                                            handleClick(id);
+                                            handleClick(id);  
                                         }
                                         }>
                                             {items} </a>
@@ -45,7 +43,7 @@ const Navbar = ({ setCountry, setSearch, setLoading, setCategory }) => {
                                 {
                                     countryData.map((data, idx) => {
                                         return (
-                                            <option className='text-uppercase' value={data} key={idx}>{data}</option>)
+                                            <option className='text-uppercase' key={idx}> {data}</option>)
                                     })
                                 }
                             </select>
