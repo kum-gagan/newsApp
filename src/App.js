@@ -56,6 +56,7 @@ function App() {
   return (
     <div>
       <Navbar 
+      category={category}
       setCountry={setCountry}
       setLoading={setLoading}
       setSearch={setSearch} 
